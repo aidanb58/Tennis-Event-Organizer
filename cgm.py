@@ -1,7 +1,8 @@
 import random
 import operator
 import math
-class players(object):
+class Players(object):
+    pros = ["Aidan", "Tommy", "Norbu"]
     def __init__(self, name, skill, singles):
         self.name = name
         self.skill = skill
@@ -122,88 +123,37 @@ class players(object):
         if duos_count == 2:
             num_attempts = 5
         singles_players.sort(key = operator.attrgetter('skill'))
-        if aidan in singles_players:
-            round1Singles.append(aidan)
-            round2Singles.append(aidan)
-            round3Singles.append(aidan)
-            singles_players.remove(aidan)
-            if len(singles_players) > 3:
-                ind = random.randint(0, len(singles_players)-1)
-                round1Singles.append(singles_players[ind])
-                singles_players.remove(singles_players[ind])
-                ind = random.randint(0, len(singles_players)-1)
-                round2Singles.append(singles_players[ind])
-                singles_players.remove(singles_players[ind])
-                ind = random.randint(0, len(singles_players)-1)
-                round3Singles.append(singles_players[ind])
-                singles_players.remove(singles_players[ind])
-            elif len(singles_players) == 3:
-                round1Singles.append(singles_players[0])
-                round2Singles.append(singles_players[1])
-                round3Singles.append(singles_players[2])
-            elif len(singles_players) == 2:
-                round1Singles = [singles_players[0], singles_players[1]]
-                round2Singles.append(singles_players[0])
-                round3Singles.append(singles_players[1])
-            elif len(singles_players) == 1:
-                round1Singles.append(singles_players[0])
-                round2Singles.append(singles_players[0])
-                round3Singles.append(singles_players[0])
-        elif tommy in singles_players:
-            round1Singles.append(tommy)
-            round2Singles.append(tommy)
-            round3Singles.append(tommy)
-            singles_players.remove(tommy)
-            if len(singles_players) > 3:
-                ind = random.randint(0, len(singles_players)-1)
-                round1Singles.append(singles_players[ind])
-                singles_players.remove(singles_players[ind])
-                ind = random.randint(0, len(singles_players)-1)
-                round2Singles.append(singles_players[ind])
-                singles_players.remove(singles_players[ind])
-                ind = random.randint(0, len(singles_players)-1)
-                round3Singles.append(singles_players[ind])
-                singles_players.remove(singles_players[ind])
-            elif len(singles_players) == 3:
-                round1Singles.append(singles_players[0])
-                round2Singles.append(singles_players[1])
-                round3Singles.append(singles_players[2])
-            elif len(singles_players) == 2:
-                round1Singles = [singles_players[0], singles_players[1]]
-                round2Singles.append(singles_players[0])
-                round3Singles.append(singles_players[1])
-            elif len(singles_players) == 1:
-                round1Singles.append(singles_players[0])
-                round2Singles.append(singles_players[0])
-                round3Singles.append(singles_players[0])
-        elif norbu in singles_players:
-            round1Singles.append(norbu)
-            round2Singles.append(norbu)
-            round3Singles.append(norbu)
-            singles_players.remove(norbu)
-            if len(singles_players) > 3:
-                ind = random.randint(0, len(singles_players)-1)
-                round1Singles.append(singles_players[ind])
-                singles_players.remove(singles_players[ind])
-                ind = random.randint(0, len(singles_players)-1)
-                round2Singles.append(singles_players[ind])
-                singles_players.remove(singles_players[ind])
-                ind = random.randint(0, len(singles_players)-1)
-                round3Singles.append(singles_players[ind])
-                singles_players.remove(singles_players[ind])
-            elif len(singles_players) == 3:
-                round1Singles.append(singles_players[0])
-                round2Singles.append(singles_players[1])
-                round3Singles.append(singles_players[2])
-            elif len(singles_players) == 2:
-                round1Singles = [singles_players[0], singles_players[1]]
-                round2Singles.append(singles_players[0])
-                round3Singles.append(singles_players[1])
-            elif len(singles_players) == 1:
-                round1Singles.append(singles_players[0])
-                round2Singles.append(singles_players[0])
-                round3Singles.append(singles_players[0])
-        else:
+        for playr in singles_players:
+            if playr.name in Players.pros:
+                proActive = True
+                round1Singles.append(playr)
+                round2Singles.append(playr)
+                round3Singles.append(playr)
+                singles_players.remove(playr)
+                if len(singles_players) > 3:
+                    ind = random.randint(0, len(singles_players)-1)
+                    round1Singles.append(singles_players[ind])
+                    singles_players.remove(singles_players[ind])
+                    ind = random.randint(0, len(singles_players)-1)
+                    round2Singles.append(singles_players[ind])
+                    singles_players.remove(singles_players[ind])
+                    ind = random.randint(0, len(singles_players)-1)
+                    round3Singles.append(singles_players[ind])
+                    singles_players.remove(singles_players[ind])
+                elif len(singles_players) == 3:
+                    round1Singles.append(singles_players[0])
+                    round2Singles.append(singles_players[1])
+                    round3Singles.append(singles_players[2])
+                elif len(singles_players) == 2:
+                    round1Singles = [singles_players[0], singles_players[1]]
+                    round2Singles.append(singles_players[0])
+                    round3Singles.append(singles_players[1])
+                elif len(singles_players) == 1:
+                    round1Singles.append(singles_players[0])
+                    round2Singles.append(singles_players[0])
+                    round3Singles.append(singles_players[0])
+                break
+        if proActive == False:
             if len(singles_players) == 3:
                 round1Singles = [singles_players[1], singles_players[2]]
                 round2Singles = [singles_players[0], singles_players[1]]
@@ -320,7 +270,7 @@ class players(object):
         duos_count = 0
         players = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11]
         for player in players:
-            if player == tommy or player == aidan:
+            if player.name in Players.pros:
                 singlePlayer = player
                 players.remove(player)
         for player in players:
@@ -342,7 +292,7 @@ class players(object):
                 if duos_count == 0:
                     players = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11]
                     for player in players:
-                        if player == tommy or player == aidan or player == norbu:
+                        if player.name in Players.pros:
                             singlePlayer = player
                             players.remove(player)
                     playersNew = shuffle(players)
@@ -350,7 +300,7 @@ class players(object):
                     first_found = False
                     players = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11]
                     for player in players:
-                        if player == tommy or player == aidan:
+                        if player.name in Players.pros:
                             singlePlayer = player
                             players.remove(player)
                     for i in range(0, len(players)):
@@ -364,7 +314,7 @@ class players(object):
                 elif duos_count == 2:
                     players = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11]
                     for player in players:
-                        if player == tommy or player == aidan:
+                        if player.name in Players.pros:
                             singlePlayer = player
                             players.remove(player)
                     ind = 0
@@ -390,7 +340,7 @@ class players(object):
                 elif duos_count == 3:
                     players = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11]
                     for player in players:
-                        if player == tommy or player == aidan:
+                        if player.name in Players.pros:
                             singlePlayer = player
                             players.remove(player)
                     ind = 0
@@ -663,62 +613,62 @@ class players(object):
 
    
 #Women
-cristi = players("Cristi", 4, False)
-marcela = players("Marcela", 6, False)
-rosie = players("Rosie", 7, True)
-heather = players("Heather", 5, True)
-jamie = players("Jamie", 9, True)
-joane = players("Joane", 7, False)
-tina = players("Tina", 3, False) #elayna's partner
-delena = players("Delena", 9, True)
-aaron = players("Aaron", 6, False) #David's wife, talkative
-elayna = players("Elayna", 4, False)
-judy = players("Judy", 3, False)
-andrea = players("Andrea", 3, False)
-peggy = players("Peggy", 5, False)
-genie = players("Genie", 3, False) #older blond lady
-cindy = players("Cindy", 5, False)
-alissa = players("Alissa", 5, False) #opp
-sonya = players("Sonya", 6, True) #foreign asian lady
-shauna = players("Shawna", 7, False)
-emily = players("Emily", 9, True)
-wendy1 = players("Wendy1", 2, False)
-wendy2 = players("Wendy2", 5, False)
-kat = players("Kat", 5, False) #younger looking, tallish skiny brown hair
-shannon = players("Shannon", 8, False)
-laura = players("Laura", 1, False)
-nasheeb = players("Nasheeb", 7, True)
-tatyana = players("Tatyana", 4, False)
-ruthane = players("Ruthane", 4, False)
-linda = players("Linda", 6, False)
-anita = players("Anita", 6, True)
-gale = players("Gale", 5, False)
-claudia = players("Claudia", 8, False)
-synthia = players("Synthia", 9, True)
+cristi = Players("Cristi", 4, False)
+marcela = Players("Marcela", 6, False)
+rosie = Players("Rosie", 7, True)
+heather = Players("Heather", 5, True)
+jamie = Players("Jamie", 9, True)
+joane = Players("Joane", 7, False)
+tina = Players("Tina", 3, False) #elayna's partner
+delena = Players("Delena", 9, True)
+aaron = Players("Aaron", 6, False) #David's wife, talkative
+elayna = Players("Elayna", 4, False)
+judy = Players("Judy", 3, False)
+andrea = Players("Andrea", 3, False)
+peggy = Players("Peggy", 5, False)
+genie = Players("Genie", 3, False) #older blond lady
+cindy = Players("Cindy", 5, False)
+alissa = Players("Alissa", 5, False) #opp
+sonya = Players("Sonya", 6, True) #foreign asian lady
+shauna = Players("Shawna", 7, False)
+emily = Players("Emily", 9, True)
+wendy1 = Players("Wendy1", 2, False)
+wendy2 = Players("Wendy2", 5, False)
+kat = Players("Kat", 5, False) #younger looking, tallish skiny brown hair
+shannon = Players("Shannon", 8, False)
+laura = Players("Laura", 1, False)
+nasheeb = Players("Nasheeb", 7, True)
+tatyana = Players("Tatyana", 4, False)
+ruthane = Players("Ruthane", 4, False)
+linda = Players("Linda", 6, False)
+anita = Players("Anita", 6, True)
+gale = Players("Gale", 5, False)
+claudia = Players("Claudia", 8, False)
+synthia = Players("Synthia", 9, True)
 #Men
-arvid = players("Arvid", 7, False)
-steve = players("Steve", 15, True)
-hayward = players("Hayward", 14, True)
-don = players("Don", 12, True)
-larry = players("Larry", 15, True) #dude with glasses, cracked
-bj = players("BJ", 14, False)
-john = players("John", 14, True)
-bruce = players("Bruce", 10, False)
-glen = players("Glen", 12, False)
-lynn = players("Lynn", 13, False)
-jessie = players("Jessie", 14, True)
-chris = players("Chris", 12, True)
-doug = players("Doug", 9, False)
-gurav = players("Gurav", 15, True)
-lee = players("Lee", 11, False)
-george = players("George", 13, False) #black guy
-tom = players("Tom", 13, False)
-andy = players("Andy", 11, False)
-norbu = players("Norbu", 13, True)
-david = players("David", 13, True) #tall, glasses, smacks ball
-ken = players("Ken", 11, False)
-aidan = players("Aidan", 16, True)
-tommy = players("Tommy", 12, True)
+arvid = Players("Arvid", 7, False)
+steve = Players("Steve", 15, True)
+hayward = Players("Hayward", 14, True)
+don = Players("Don", 12, True)
+larry = Players("Larry", 15, True) #dude with glasses, cracked
+bj = Players("BJ", 14, False)
+john = Players("John", 14, True)
+bruce = Players("Bruce", 10, False)
+glen = Players("Glen", 12, False)
+lynn = Players("Lynn", 13, False)
+jessie = Players("Jessie", 14, True)
+chris = Players("Chris", 12, True)
+doug = Players("Doug", 9, False)
+gurav = Players("Gurav", 15, True)
+lee = Players("Lee", 11, False)
+george = Players("George", 13, False) #black guy
+tom = Players("Tom", 13, False)
+andy = Players("Andy", 11, False)
+norbu = Players("Norbu", 13, True)
+david = Players("David", 13, True) #tall, glasses, smacks ball
+ken = Players("Ken", 11, False)
+aidan = Players("Aidan", 16, True)
+tommy = Players("Tommy", 12, True)
 
 def shuffle(lst):
     new_lst = []
@@ -736,7 +686,7 @@ active_players = []
 
 
 print("Enter players one by one.\nIf you wish to add a new player, enter \"new\".\nIf you wish to stop entering players, enter \"stop\".\nHere are the players in the system:")
-print("\nWomen: Aaron, Anita, Andrea, Alissa, Cindy, Cristi, Claudia, Delena, Elayna, Emily, Gale, Genie, Heather, Jamie, Joane, Judy, Kat, Laura, Marcela, Nasheeb, Peggy, Rosie, Shannon, Shauna, Tina, Tonya, Wendy1, Wendy2, Synthia")
+print("\nWomen: Aaron, Anita, Andrea, Alissa, Cindy, Cristi, Claudia, Delena, Elayna, Emily, Gale, Genie, Heather, Jamie, Joane, Judy, Kat, Laura, Marcela, Nasheeb, Peggy, Rosie, Shannon, Shauna, Tina, Sonya, Wendy1, Wendy2, Synthia")
 print("\nMen: Aidan, Andy, Arvid, BJ, Bruce, Chris, David, Don, Doug, George, Glen, Gurav, Hayward, Jessie, John, Ken, Larry, Lee, Lynn, Norbu, Steve, Tom, Tommy")
 
 players_lst = [aaron, anita, andrea, alissa, cindy, cristi, delena, elayna, emily, genie, heather, jamie, joane, judy, kat, laura, gale, marcela, nasheeb, peggy, rosie, shannon, shauna, tina, sonya, wendy1, wendy2, linda, ruthane, tatyana, aidan, andy, bj, bruce, chris, david, don, doug, george, glen, gurav, hayward, jessie, john, ken, larry, lee, lynn, norbu, tom, tommy, claudia, synthia, arvid, steve]
@@ -754,7 +704,7 @@ while repeat == True:
             singles = True
         elif "n" in singles.lower():
             singles = False
-        player = players(name, skill, singles)
+        player = Players(name, skill, singles)
         active_players.append(player)
     else:
         valid = False
@@ -794,14 +744,14 @@ while rpt == True:
 if len(active_players) < 8:
     print("Sorry. Not enough players")
 elif len(active_players) == 8:
-    players.shuffle8(active_players[0], active_players[1], active_players[2], active_players[3], active_players[4], active_players[5], active_players[6], active_players[7])
+    Players.shuffle8(active_players[0], active_players[1], active_players[2], active_players[3], active_players[4], active_players[5], active_players[6], active_players[7])
 elif len(active_players) == 9:
     ("9 active players. Please remove or add a player and try again.")
 elif len(active_players) == 10:
-    players.shuffle10(active_players[0], active_players[1], active_players[2], active_players[3], active_players[4], active_players[5], active_players[6], active_players[7], active_players[8], active_players[9])
+    Players.shuffle10(active_players[0], active_players[1], active_players[2], active_players[3], active_players[4], active_players[5], active_players[6], active_players[7], active_players[8], active_players[9])
 elif len(active_players) == 11:
-    players.shuffle11(active_players[0], active_players[1], active_players[2], active_players[3], active_players[4], active_players[5], active_players[6], active_players[7], active_players[8], active_players[9], active_players[10])
+    Players.shuffle11(active_players[0], active_players[1], active_players[2], active_players[3], active_players[4], active_players[5], active_players[6], active_players[7], active_players[8], active_players[9], active_players[10])
 elif len(active_players) == 12:
-    players.shuffle12(active_players[0], active_players[1], active_players[2], active_players[3], active_players[4], active_players[5], active_players[6], active_players[7], active_players[8], active_players[9], active_players[10], active_players[11])
+    Players.shuffle12(active_players[0], active_players[1], active_players[2], active_players[3], active_players[4], active_players[5], active_players[6], active_players[7], active_players[8], active_players[9], active_players[10], active_players[11])
 else:
     print("Too many players. Not enough courts.")
