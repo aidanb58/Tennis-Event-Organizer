@@ -2,7 +2,7 @@ import random
 import operator
 import math
 class Players(object):
-    pros = ["Aidan", "Tommy", "Norbu"]
+    pros = []  #enter the names of the pros/coaches here. Capitalized, in quotation marks, and seperated by commas
     def __init__(self, name, skill, singles):
         self.name = name
         self.skill = skill
@@ -611,64 +611,14 @@ class Players(object):
                     if i == 11:
                         best_combo[i].prev_opponents.append(best_combo[i-2])
 
-   
-#Women
-cristi = Players("Cristi", 4, False)
-marcela = Players("Marcela", 6, False)
-rosie = Players("Rosie", 7, True)
-heather = Players("Heather", 5, True)
-jamie = Players("Jamie", 9, True)
-joane = Players("Joane", 7, False)
-tina = Players("Tina", 3, False) #elayna's partner
-delena = Players("Delena", 9, True)
-aaron = Players("Aaron", 6, False) #David's wife, talkative
-elayna = Players("Elayna", 4, False)
-judy = Players("Judy", 3, False)
-andrea = Players("Andrea", 3, False)
-peggy = Players("Peggy", 5, False)
-genie = Players("Genie", 3, False) #older blond lady
-cindy = Players("Cindy", 5, False)
-alissa = Players("Alissa", 5, False) #opp
-sonya = Players("Sonya", 6, True) #foreign asian lady
-shauna = Players("Shawna", 7, False)
-emily = Players("Emily", 9, True)
-wendy1 = Players("Wendy1", 2, False)
-wendy2 = Players("Wendy2", 5, False)
-kat = Players("Kat", 5, False) #younger looking, tallish skiny brown hair
-shannon = Players("Shannon", 8, False)
-laura = Players("Laura", 1, False)
-nasheeb = Players("Nasheeb", 7, True)
-tatyana = Players("Tatyana", 4, False)
-ruthane = Players("Ruthane", 4, False)
-linda = Players("Linda", 6, False)
-anita = Players("Anita", 6, True)
-gale = Players("Gale", 5, False)
-claudia = Players("Claudia", 8, False)
-synthia = Players("Synthia", 9, True)
-#Men
-arvid = Players("Arvid", 7, False)
-steve = Players("Steve", 15, True)
-hayward = Players("Hayward", 14, True)
-don = Players("Don", 12, True)
-larry = Players("Larry", 15, True) #dude with glasses, cracked
-bj = Players("BJ", 14, False)
-john = Players("John", 14, True)
-bruce = Players("Bruce", 10, False)
-glen = Players("Glen", 12, False)
-lynn = Players("Lynn", 13, False)
-jessie = Players("Jessie", 14, True)
-chris = Players("Chris", 12, True)
-doug = Players("Doug", 9, False)
-gurav = Players("Gurav", 15, True)
-lee = Players("Lee", 11, False)
-george = Players("George", 13, False) #black guy
-tom = Players("Tom", 13, False)
-andy = Players("Andy", 11, False)
-norbu = Players("Norbu", 13, True)
-david = Players("David", 13, True) #tall, glasses, smacks ball
-ken = Players("Ken", 11, False)
-aidan = Players("Aidan", 16, True)
-tommy = Players("Tommy", 12, True)
+# Add players to be stored in the program here. Store them in the format: 
+# name = Players("Name", skill level, singles)   
+# Enter an integer for skill level. Higher number = higher skill. Enter True for willing to play singles and False for not willing.
+# Examples:
+# amelia = Players("Amelia", 6, False) 
+# rob = Players("Rob", 8, True)
+
+
 
 def shuffle(lst):
     new_lst = []
@@ -686,10 +636,10 @@ active_players = []
 
 
 print("Enter players one by one.\nIf you wish to add a new player, enter \"new\".\nIf you wish to stop entering players, enter \"stop\".\nHere are the players in the system:")
-print("\nWomen: Aaron, Anita, Andrea, Alissa, Cindy, Cristi, Claudia, Delena, Elayna, Emily, Gale, Genie, Heather, Jamie, Joane, Judy, Kat, Laura, Marcela, Nasheeb, Peggy, Rosie, Shannon, Shauna, Tina, Sonya, Wendy1, Wendy2, Synthia")
-print("\nMen: Aidan, Andy, Arvid, BJ, Bruce, Chris, David, Don, Doug, George, Glen, Gurav, Hayward, Jessie, John, Ken, Larry, Lee, Lynn, Norbu, Steve, Tom, Tommy")
+print("\nWomen: ") #put the names of all the women here if you wish for them to be displayed
+print("\nMen: ")   #put the names of all the men here if you wish for them to be displayed
 
-players_lst = [aaron, anita, andrea, alissa, cindy, cristi, delena, elayna, emily, genie, heather, jamie, joane, judy, kat, laura, gale, marcela, nasheeb, peggy, rosie, shannon, shauna, tina, sonya, wendy1, wendy2, linda, ruthane, tatyana, aidan, andy, bj, bruce, chris, david, don, doug, george, glen, gurav, hayward, jessie, john, ken, larry, lee, lynn, norbu, tom, tommy, claudia, synthia, arvid, steve]
+players_lst = [] #put every single player object name in the list, seperated by commas. Ex: [amelia, rob]
 active_players = []
 repeat = True
 while repeat == True:
@@ -742,7 +692,7 @@ while rpt == True:
 
 
 if len(active_players) < 8:
-    print("Sorry. Not enough players")
+    print("Sorry not enough players. Please enter at least 8 players")
 elif len(active_players) == 8:
     Players.shuffle8(active_players[0], active_players[1], active_players[2], active_players[3], active_players[4], active_players[5], active_players[6], active_players[7])
 elif len(active_players) == 9:
@@ -754,4 +704,4 @@ elif len(active_players) == 11:
 elif len(active_players) == 12:
     Players.shuffle12(active_players[0], active_players[1], active_players[2], active_players[3], active_players[4], active_players[5], active_players[6], active_players[7], active_players[8], active_players[9], active_players[10], active_players[11])
 else:
-    print("Too many players. Not enough courts.")
+    print("Too many players. Enter at most 12 players")
