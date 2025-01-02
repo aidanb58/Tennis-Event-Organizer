@@ -1,6 +1,6 @@
 import random
 import operator
-import math
+
 class Players(object):
     pros = []  #enter the names of the pros/coaches here. Capitalized, in quotation marks, and seperated by commas
     def __init__(self, name, skill, singles):
@@ -10,13 +10,13 @@ class Players(object):
         self.singles = singles
         self.prev_partners = []
         self.prev_opponents = []
+        
     def shuffle8(player1, player2, player3, player4, player5, player6, player7, player8):
         duos_count = 0
         players = [player1, player2, player3, player4, player5, player6, player7, player8]
         for player in players:
             if player.partner != None:
                 duos_count += 0.5
-        duos_count = math.floor(duos_count)
         if duos_count == 0:
             num_attempts = 30
         if duos_count == 1:
@@ -27,12 +27,11 @@ class Players(object):
             round = i
             possible_matches = []
             while len(possible_matches) <= num_attempts:
+                players = [player1, player2, player3, player4, player5, player6, player7, player8]
                 if duos_count == 0:
-                    players = [player1, player2, player3, player4, player5, player6, player7, player8]
-                    playersNew = shuffle(players)
+                    playersNew = Players.shuffle(players)
                 elif duos_count == 1:
                     first_found = False
-                    players = [player1, player2, player3, player4, player5, player6, player7, player8]
                     for i in range(0, len(players)):
                         if players[i].partner != None:
                             if first_found == False:
@@ -40,9 +39,8 @@ class Players(object):
                                 first_found = True
                             else:
                                 players[i], players[1] = players[1], players[i]
-                    playersNew = [players[0], players[1]] + shuffle(players[2:8])
+                    playersNew = [players[0], players[1]] + Players.shuffle(players[2:8])
                 elif duos_count == 2:
-                    players = [player1, player2, player3, player4, player5, player6, player7, player8]
                     ind = 0
                     i = 0
                     while i < len(players):
@@ -56,7 +54,7 @@ class Players(object):
                                     i += 2
                         else:          
                             i += 1
-                    playersNew = [players[0], players[1], players[2], players[3]] + shuffle(players[4:8])
+                    playersNew = [players[0], players[1], players[2], players[3]] + Players.shuffle(players[4:8])
                     if round == 2:
                         playersNew[2], playersNew[4] = playersNew[4], playersNew[2]
                         playersNew[3], playersNew[5] = playersNew[5], playersNew[3]
@@ -113,16 +111,16 @@ class Players(object):
         for player in players:
             if player.partner != None:
                 duos_count += 0.5
-            elif player.singles == True:
+            elif player.singles:
                 singles_players.append(player)
-        duos_count = math.floor(duos_count)
         if duos_count == 0:
             num_attempts = 30
         if duos_count == 1:
-            num_attempts = 10
+            num_attempts = 15
         if duos_count == 2:
             num_attempts = 5
         singles_players.sort(key = operator.attrgetter('skill'))
+        proActive = False
         for playr in singles_players:
             if playr.name in Players.pros:
                 proActive = True
@@ -181,15 +179,14 @@ class Players(object):
             print(f'Round {round}:\n{singles[0].name} vs {singles[1].name}')
             possible_matches = []
             while len(possible_matches) <= num_attempts:
+                players = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10]
                 if duos_count == 0:
-                    players = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10]
                     for player in players:
                         if player in singles:
                             players.remove(player)
-                    playersNew = shuffle(players)
+                    playersNew = Players.shuffle(players)
                 elif duos_count == 1:
                     first_found = False
-                    players = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10]
                     for player in players:
                         if player in singles:
                             players.remove(player)
@@ -200,9 +197,8 @@ class Players(object):
                                 first_found = True
                             else:
                                 players[i], players[1] = players[1], players[i]
-                    playersNew = [players[0], players[1]] + shuffle(players[2:8])
+                    playersNew = [players[0], players[1]] + Players.shuffle(players[2:8])
                 elif duos_count == 2:
-                    players = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10]
                     for player in players:
                         if player in singles:
                             players.remove(player)
@@ -219,7 +215,7 @@ class Players(object):
                                     i += 2
                         else:          
                             i += 1
-                    playersNew = [players[0], players[1], players[2], players[3]] + shuffle(players[4:8])
+                    playersNew = [players[0], players[1], players[2], players[3]] + Players.shuffle(players[4:8])
                     if round == 2:
                         playersNew[2], playersNew[4] = playersNew[4], playersNew[2]
                         playersNew[3], playersNew[5] = playersNew[5], playersNew[3]
@@ -270,39 +266,37 @@ class Players(object):
         duos_count = 0
         players = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11]
         for player in players:
-            if player.name in Players.pros:
-                singlePlayer = player
-                players.remove(player)
-        for player in players:
             if player.partner != None:
                 duos_count += 0.5
-        duos_count = math.floor(duos_count)
         if duos_count == 0:
-            num_attempts = 35
-        if duos_count == 1:
             num_attempts = 25
+        if duos_count == 1:
+            num_attempts = 10
         if duos_count == 2:
-            num_attempts = 5
+            num_attempts = 4
         if duos_count == 3:
-            num_attempts = 3
+            num_attempts = 2
         for i in range(1, 4):
             round = i
             possible_matches = []
             while len(possible_matches) <= num_attempts:
+                players = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11]
+                singlesFound = False
+                for player in players:
+                    if player.name in Players.pros:
+                        singlePlayer = player
+                        singlesFound = True
+                if not singlesFound:
+                    bestPlayer = player1
+                    for i in range (1, len(players)):
+                        if (players[i].skill > bestPlayer.skill) and (players[i].singles):
+                            bestPlayer = players[i]
+                    singlePlayer = bestPlayer
+                players.remove(singlePlayer)
                 if duos_count == 0:
-                    players = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11]
-                    for player in players:
-                        if player.name in Players.pros:
-                            singlePlayer = player
-                            players.remove(player)
-                    playersNew = shuffle(players)
+                    playersNew = Players.shuffle(players)
                 elif duos_count == 1:
                     first_found = False
-                    players = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11]
-                    for player in players:
-                        if player.name in Players.pros:
-                            singlePlayer = player
-                            players.remove(player)
                     for i in range(0, len(players)):
                         if players[i].partner != None:
                             if first_found == False:
@@ -310,13 +304,8 @@ class Players(object):
                                 first_found = True
                             else:
                                 players[i], players[1] = players[1], players[i]
-                    playersNew = [players[0], players[1]] + shuffle(players[2:10])
+                    playersNew = [players[0], players[1]] + Players.shuffle(players[2:10])
                 elif duos_count == 2:
-                    players = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11]
-                    for player in players:
-                        if player.name in Players.pros:
-                            singlePlayer = player
-                            players.remove(player)
                     ind = 0
                     i = 0
                     while i < len(players):
@@ -330,7 +319,7 @@ class Players(object):
                                     i += 2
                         else:          
                             i += 1
-                    playersNew = [players[0], players[1], players[2], players[3]] + shuffle(players[4:10])
+                    playersNew = [players[0], players[1], players[2], players[3]] + Players.shuffle(players[4:10])
                     if round == 2:
                         playersNew[2], playersNew[4] = playersNew[4], playersNew[2]
                         playersNew[3], playersNew[5] = playersNew[5], playersNew[3]
@@ -338,11 +327,6 @@ class Players(object):
                         playersNew[0], playersNew[6] = playersNew[6], playersNew[0]
                         playersNew[1], playersNew[7] = playersNew[7], playersNew[1]
                 elif duos_count == 3:
-                    players = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11]
-                    for player in players:
-                        if player.name in Players.pros:
-                            singlePlayer = player
-                            players.remove(player)
                     ind = 0
                     i = 0
                     while i < len(players):
@@ -356,7 +340,7 @@ class Players(object):
                                     i += 2
                         else:          
                             i += 1
-                    playersNew = [players[0], players[1], players[2], players[3], players[4], players[5]] + shuffle(players[6:10])
+                    playersNew = [players[0], players[1], players[2], players[3], players[4], players[5]] + Players.shuffle(players[6:10])
                     if round == 2:
                         playersNew[2], playersNew[8] = playersNew[8], playersNew[2]
                         playersNew[3], playersNew[9] = playersNew[9], playersNew[3]
@@ -450,7 +434,6 @@ class Players(object):
         for player in players:
             if player.partner != None:
                 duos_count += 0.5
-        duos_count = math.floor(duos_count)
         if duos_count == 0:
             num_attempts = 75
         if duos_count == 1:
@@ -463,12 +446,11 @@ class Players(object):
             round = i
             possible_matches = []
             while len(possible_matches) <= num_attempts:
+                players = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11, player12]
                 if duos_count == 0:
-                    players = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11, player12]
-                    playersNew = shuffle(players)
+                    playersNew = Players.shuffle(players)
                 elif duos_count == 1:
                     first_found = False
-                    players = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11, player12]
                     for i in range(0, len(players)):
                         if players[i].partner != None:
                             if first_found == False:
@@ -476,9 +458,8 @@ class Players(object):
                                 first_found = True
                             else:
                                 players[i], players[1] = players[1], players[i]
-                    playersNew = [players[0], players[1]] + shuffle(players[2:12])
+                    playersNew = [players[0], players[1]] + Players.shuffle(players[2:12])
                 elif duos_count == 2:
-                    players = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11, player12]
                     ind = 0
                     i = 0
                     while i < len(players):
@@ -492,7 +473,7 @@ class Players(object):
                                     i += 2
                         else:          
                             i += 1
-                    playersNew = [players[0], players[1], players[2], players[3]] + shuffle(players[4:12])
+                    playersNew = [players[0], players[1], players[2], players[3]] + Players.shuffle(players[4:12])
                     if round == 2:
                         playersNew[2], playersNew[4] = playersNew[4], playersNew[2]
                         playersNew[3], playersNew[5] = playersNew[5], playersNew[3]
@@ -500,7 +481,6 @@ class Players(object):
                         playersNew[0], playersNew[6] = playersNew[6], playersNew[0]
                         playersNew[1], playersNew[7] = playersNew[7], playersNew[1]
                 elif duos_count == 3:
-                    players = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11, player12]
                     ind = 0
                     i = 0
                     while i < len(players):
@@ -514,7 +494,7 @@ class Players(object):
                                     i += 2
                         else:          
                             i += 1
-                    playersNew = [players[0], players[1], players[2], players[3], players[4], players[5]] + shuffle(players[6:12])
+                    playersNew = [players[0], players[1], players[2], players[3], players[4], players[5]] + Players.shuffle(players[6:12])
                     if round == 2:
                         playersNew[2], playersNew[8] = playersNew[8], playersNew[2]
                         playersNew[3], playersNew[9] = playersNew[9], playersNew[3]
@@ -611,6 +591,17 @@ class Players(object):
                     if i == 11:
                         best_combo[i].prev_opponents.append(best_combo[i-2])
 
+    def shuffle(lst):
+        new_lst = []
+        while len(lst) > 0:
+            added_var = random.randint(0, len(lst)-1)
+            new_lst.append(lst[added_var])
+            lst.remove(lst[added_var])
+        return new_lst
+
+
+
+
 # Add players to be stored in the program here. Store them in the format: 
 # name = Players("Name", skill level, singles)   
 # Enter an integer for skill level. Higher number = higher skill. Enter True for willing to play singles and False for not willing.
@@ -619,20 +610,9 @@ class Players(object):
 # rob = Players("Rob", 8, True)
 
 
-
-def shuffle(lst):
-    new_lst = []
-    while len(lst) > 0:
-        added_var = random.randint(0, len(lst)-1)
-        new_lst.append(lst[added_var])
-        lst.remove(lst[added_var])
-    return new_lst
-
-
 objects = []
 inputs = []
 active_players = []
-
 
 
 print("Enter players one by one.\nIf you wish to add a new player, enter \"new\".\nIf you wish to stop entering players, enter \"stop\".\nHere are the players in the system:")
