@@ -1,8 +1,9 @@
 import random
 import operator
 
+# This class defines player objects and organizes tennis events with different numbers of participants
 class Players(object):
-    pros = []  #enter the names of the pros/coaches here. Capitalized, in quotation marks, and seperated by commas
+    pros = []  # Enter the names of the pros/coaches here. Capitalized, in quotation marks, and seperated by commas
     def __init__(self, name, skill, singles):
         self.name = name
         self.skill = skill
@@ -10,7 +11,8 @@ class Players(object):
         self.singles = singles
         self.prev_partners = []
         self.prev_opponents = []
-        
+
+    # This method organizes matchplay for 8 players
     def shuffle8(player1, player2, player3, player4, player5, player6, player7, player8):
         duos_count = 0
         players = [player1, player2, player3, player4, player5, player6, player7, player8]
@@ -100,7 +102,8 @@ class Players(object):
                         if i == 3:
                             if best_combo[i-2].partner != None:
                                 best_combo[i].prev_opponents.append(best_combo[i-2])
-   
+
+    # This method organizes matchplay for 10 players
     def shuffle10(player1, player2, player3, player4, player5, player6, player7, player8, player9, player10):
         players = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10]
         singles_players = []
@@ -261,7 +264,8 @@ class Players(object):
                         if i == 3:
                             if best_combo[i-2].partner != None:
                                 best_combo[i].prev_opponents.append(best_combo[i-2])
-   
+
+    # This method organizes matchplay for 11 players
     def shuffle11(player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11):
         duos_count = 0
         players = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11]
@@ -428,6 +432,7 @@ class Players(object):
                         if i == 9:
                             best_combo[i].prev_opponents.append(best_combo[i+1])
 
+    # This method organizes matchplay for 12 players
     def shuffle12(player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11, player12):
         duos_count = 0
         players = [player1, player2, player3, player4, player5, player6, player7, player8, player9, player10, player11, player12]
@@ -610,11 +615,9 @@ class Players(object):
 # rob = Players("Rob", 8, True)
 
 
-objects = []
-inputs = []
-active_players = []
 
 
+# Below is a user interface to add players to an event
 print("Enter players one by one.\nIf you wish to add a new player, enter \"new\".\nIf you wish to stop entering players, enter \"stop\".\nHere are the players in the system:")
 print("\nWomen: ") #put the names of all the women here if you wish for them to be displayed
 print("\nMen: ")   #put the names of all the men here if you wish for them to be displayed
