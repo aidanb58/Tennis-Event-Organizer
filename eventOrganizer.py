@@ -619,10 +619,10 @@ class Players(object):
 
 # Below is a user interface to add players to an event
 print("Enter players one by one.\nIf you wish to add a new player, enter \"new\".\nIf you wish to stop entering players, enter \"stop\".\nHere are the players in the system:")
-print("\nWomen: ") #put the names of all the women here if you wish for them to be displayed
-print("\nMen: ")   #put the names of all the men here if you wish for them to be displayed
+print("\nWomen: ") # put the names of all the women here if you wish for them to be displayed
+print("\nMen: ")   # put the names of all the men here if you wish for them to be displayed
 
-players_lst = [] #put every single player object name in the list, seperated by commas. Ex: [amelia, rob]
+players_lst = [] # put every single player object name in the list, seperated by commas. Ex: [amelia, rob]
 active_players = []
 repeat = True
 while repeat == True:
